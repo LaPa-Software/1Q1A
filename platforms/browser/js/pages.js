@@ -33,7 +33,7 @@ var APPPAGE={
                         });*/
                     }else{
                         loader.end();
-                        APP.mode('OFFLINE');
+                         /*APP.mode('OFFLINE');*/
                     }
                 });
             });
