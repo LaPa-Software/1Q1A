@@ -13,7 +13,7 @@ var APPPAGE={
             loader.set(0.1);
             APP.require('js/io.js',function () {
                 loader.set(0.3);
-                APP.io({'initConnect':'true'},function (response) {
+                /*APP.io({'initConnect':'true'},function (response) {
                     loader.set(0.4);
                     if(response) {
                         APP.require('js/user.js',function () {
@@ -35,7 +35,7 @@ var APPPAGE={
                         loader.end();
                         APP.mode('OFFLINE');
                     }
-                });
+                });*/
             });
         }
     },
