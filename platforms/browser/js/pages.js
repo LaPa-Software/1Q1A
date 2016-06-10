@@ -14,9 +14,10 @@ var APPPAGE={
             APP.require('js/io.js',function () {
                 loader.set(0.3);
                 APP.io({'initConnect':'true'},function (response) {
-                    loader.set(0.4);
+                    alert(response);
+                    /*loader.set(0.4);
                     if(response) {
-                        /*APP.require('js/user.js',function () {
+                        APP.require('js/user.js',function () {
                             loader.set(0.7);
                             APP.io({'syncUserData': APP.CONF.account.token || false}, function (response) {
                                 loader.set(0.9);
@@ -30,11 +31,11 @@ var APPPAGE={
                                     }
                                 }
                             });
-                        });*/
+                        });
                     }else{
                         loader.end();
-                         /*APP.mode('OFFLINE');*/
-                    }
+                         APP.mode('OFFLINE');
+                    }*/
                 });
             });
         }
