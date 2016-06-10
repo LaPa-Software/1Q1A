@@ -67,3 +67,4 @@ $RECYCLE.BIN/
 .cordova/
 .gitignore
 hooks/
+API/

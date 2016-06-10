@@ -1,5 +1,5 @@
 ;(function() {
-    //'use strict';
+    'use strict';
     //if(window.APP)return;
     var CONF;
     var PAGE;
@@ -46,7 +46,7 @@
     function renderPage(id) {
         document.body.innerHTML=APP.PAGE[id].body;
         window.title=APP.PAGE[id].title||CONF.title;
-        //if(APP.PAGE[id].init)try{APP.PAGE[id].init();}catch(e){console.log('Error while initialising page: '+id);throw e}
+        if(APP.PAGE[id].init)try{APP.PAGE[id].init();}catch(e){console.log('Error while initialising page: '+id);throw e}
         APP.pageState='ready';
         APP.targetPage=false;
     }
