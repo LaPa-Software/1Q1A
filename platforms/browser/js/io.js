@@ -1,6 +1,7 @@
 ;(function() {
     var io=function (data,onFinish,target,plainData) {
-        target=target||APP.CONF.server.apiUrl;
+        alert('Work!');
+        /*target=target||APP.CONF.server.apiUrl;
         data=data||{};
         data='?query='+JSON.stringify(data);
         var xhr = new XMLHttpRequest();
@@ -21,7 +22,7 @@
             }
             if(onFinish)onFinish(response);
         };
-        xhr.send();
+        xhr.send();*/
     };
     function initIoLib() {
         window.APP.io=io;
