@@ -5,7 +5,7 @@
         data='?query='+JSON.stringify(data);
         var xhr = new XMLHttpRequest();
         xhr.open('GET', target+data, true);
-        if(xhr.onload) {
+        /*if(xhr.onload) {
             xhr.onload = function (e) {
                 var response = this.response;
                 if (this.status == 200) {
@@ -21,7 +21,7 @@
                 }
                 if (onFinish)onFinish(response);
             };
-        }else {
+        }else {*/
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     var response = xhr.responseText;
@@ -39,7 +39,7 @@
                     if (onFinish)onFinish(response);
                 }
             };
-        }
+        //}
         xhr.send();
     };
     function initIoLib() {
