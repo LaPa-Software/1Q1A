@@ -8,15 +8,18 @@ var APPPAGE={
                 template: 1
             });
             APP.HOOK.reg('modeChanged','init',function (mode) {
-                if(mode=='OFFLINE'){document.getElementById('preloader').innerHTML='<span class="error">Не удалось установить соединение</span>'}
+                if(mode=='OFFLINE'){document.getElementById('preloader').innerHTML='<span class="error">Не удалось установить соединение</span><br><button onclick="location.href=\'https://lapa.ndhost.ru/1Q1A/WEB\';">Загрузить Web версию</button>'}
             },'loadInform');
             loader.start();
             loader.set(0.1);
+            alert('loading IO.js ...');
             APP.require('js/io.js',function () {
                 loader.set(0.3);
+                alert('IO.js loaded');
                 APP.io({'initConnect':'true'},function (response) {
                     loader.set(0.4);
                     if(response) {
+                        alert('initConnect finished');
                         APP.require('js/user.js',function () {
                             loader.set(0.7);
                             APP.io({'syncUserData': APP.CONF.account.token || false}, function (response) {
@@ -33,6 +36,7 @@ var APPPAGE={
                             });
                         });
                     }else{
+                        alert('error while initConnect');
                         loader.end();
                         APP.mode('OFFLINE');
                     }
