@@ -12,14 +12,14 @@ var APPPAGE={
             },'loadInform');
             loader.start();
             loader.set(0.1);
-            alert('loading IO.js ...');
+            //alert('loading IO.js ...');
             APP.require('js/io.js',function () {
                 loader.set(0.3);
-                alert('IO.js loaded');
+                //alert('IO.js loaded');
                 APP.io({'initConnect':'true'},function (response) {
                     loader.set(0.4);
                     if(response) {
-                        alert('initConnect finished');
+                        //alert('initConnect finished');
                         APP.require('js/user.js',function () {
                             loader.set(0.7);
                             APP.io({'syncUserData': APP.CONF.account.token || false}, function (response) {
@@ -36,7 +36,7 @@ var APPPAGE={
                             });
                         });
                     }else{
-                        alert('error while initConnect');
+                        //alert('error while initConnect');
                         loader.end();
                         APP.mode('OFFLINE');
                     }
