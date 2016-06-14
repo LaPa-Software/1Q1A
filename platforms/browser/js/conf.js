@@ -1,9 +1,10 @@
 var APPCONF = {
     'server':{
-        apiUrl:'lapa.ndhost.ru/1Q1A/api.php'
+        apiUrl:'//lapa.ndhost.ru/1Q1A/api.php'
     },
     'account':{
         
     },
-    'initPage': 'init'
+    'initPage': 'init',
+    'backButton': true
 };

@@ -5,7 +5,7 @@
       <paths name="Landing on NodeHost">
         <serverdata>
           <mappings>
-            <mapping deploy="/1Q1A" local="$PROJECT_DIR$/www" web="/1Q1A" />
+            <mapping deploy="/1Q1A/WEB" local="$PROJECT_DIR$/www" web="/1Q1A/WEB" />
             <mapping deploy="/1Q1A" local="$PROJECT_DIR$/API" web="/1Q1A" />
           </mappings>
           <excludedPaths>

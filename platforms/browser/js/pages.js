@@ -1,6 +1,7 @@
 var APPPAGE={
     'init':{
         'title':'Loading...',
+        'hideHistory':true,
         'body':'<div id="logo"><img src="icon.png"/><br>1 Вопрос <span class="title-colour-second">-</span><span class="title-colour"> 1 Ответ</span></div><div class="bottom-edge" id="preloader">Подключение...</div>',
         'init':function () {
             var loader = new Mprogress({
@@ -14,7 +15,6 @@ var APPPAGE={
             APP.require('js/io.js',function () {
                 loader.set(0.3);
                 APP.io({'initConnect':'true'},function (response) {
-                    //alert(response);
                     loader.set(0.4);
                     if(response) {
                         APP.require('js/user.js',function () {
@@ -34,7 +34,7 @@ var APPPAGE={
                         });
                     }else{
                         loader.end();
-                         APP.mode('OFFLINE');
+                        APP.mode('OFFLINE');
                     }
                 });
             });
@@ -45,7 +45,16 @@ var APPPAGE={
         'body':'Главный экран'
     },
     'start':{
+        'hideHistory':true,
         'title':'Добро пожаловать!',
-        'body':'Описание сервиса и ссылки на регистрацию'
+        'body':'<div id="logo"><img src="icon.png"/><br>1 Вопрос <span class="title-colour-second">-</span><span class="title-colour"> 1 Ответ</span></div><div class="buttons-block bottom-edge-block"><button id="auth" onclick="APP.page(\'auth\');">Авторизация</button><br><button id="reg" onclick="APP.page(\'reg\');">Регистрация</button></div>'
+    },
+    'auth':{
+        'title':'Авторизация',
+        'body':'Авторизация'
+    },
+    'reg':{
+        'title':'Регистрация',
+        'body':'Регистрация'
     }
 };

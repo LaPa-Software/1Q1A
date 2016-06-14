@@ -5,5 +5,5 @@
     function initUserLib() {
         window.APP.fetchAccount=fetchAccount;
     }
-    addEventListener('PreInit',initUserLib);
+    APP.HOOK.reg('PreInit',false,initUserLib,'user.js');
 })();
