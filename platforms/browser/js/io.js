@@ -8,8 +8,9 @@
         alert('request to '+target + data);
         xhr.responseType = 'text';
         if(xhr.onload) {
+            alert('onLoad Event');
             xhr.onload = function (e) {
-                alert('request finished with status ' + this.status);
+                alert('request finished with status ' + this.status +' and response '+this.response);
                 var response = this.response;
                 if (this.status == 200) {
                     if (!plainData) {
@@ -25,9 +26,10 @@
                 if (onFinish)onFinish(response);
             };
         }else{
+            alert('onReadyStateChange Event');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4){
-                    alert('request finished with status ' + xhr.status);
+                    alert('request finished with status ' + xhr.status + ' and response '+xhr.responseText);
                     var response = xhr.responseText;
                     if(xhr.status == 200) {
                         if (!plainData) {
