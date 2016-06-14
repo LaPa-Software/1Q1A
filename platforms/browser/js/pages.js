@@ -8,7 +8,7 @@ var APPPAGE={
                 template: 1
             });
             APP.HOOK.reg('modeChanged','init',function (mode) {
-                if(mode=='OFFLINE'){document.getElementById('preloader').innerHTML='<span class="error">Не удалось установить соединение</span><br><button onclick="location.replace(\'https://lapa.ndhost.ru/1Q1A/WEB\');">Загрузить Web версию</button>'}
+                if(mode=='OFFLINE'){document.getElementById('preloader').innerHTML='<span class="error">Не удалось установить соединение</span><br><button onclick="window.open(\'https://lapa.ndhost.ru/1Q1A/WEB\', \'_system\');">Загрузить Web версию</button>'}
             },'loadInform');
             loader.start();
             loader.set(0.1);
