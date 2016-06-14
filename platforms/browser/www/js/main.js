@@ -8,6 +8,7 @@
     APP.LIB={};
     var HOOK={};
     var activeHooks={};
+    var HISTORY=[];
     function regHook(trigger,page,func,id){
         id=id||Object.keys(HOOK).length;
         page=page||false;
@@ -44,10 +45,13 @@
 
     }
     function renderPage(id) {
-        document.body.innerHTML=APP.PAGE[id].body;
+        document.body.innerHTML='<div>'+APP.PAGE[id].body+'</div>';
+        if(APP.CONF.backButton&&!APP.PAGE[id].hideHistory)document.body.innerHTML+='<button id="backButton" onclick="APP.back()">Назад</button>';
         window.title=APP.PAGE[id].title||CONF.title;
         if(APP.PAGE[id].init)try{APP.PAGE[id].init();}catch(e){console.log('Error while initialising page: '+id);throw e}
         APP.pageState='ready';
+        if(!APP.PAGE[id].hideHistory)HISTORY[HISTORY.length]=id;
+        APP.thisPage=id;
         APP.targetPage=false;
     }
     var page = APP.page = function (id) {
@@ -58,7 +62,6 @@
             return;
         }
         renderPage(id);
-        APP.thisPage=id;
     };
     var execLib = APP.execLib = function (id) {
         eval(APP.LIB[id]);
@@ -66,7 +69,7 @@
     var require = APP.require = function (path,onComplete) {
         if(APP.LIB[path]){if(onComplete)onComplete();return true;}
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', path, true);
+        xhr.open('GET', path+'?rnd='+new Date().getTime(), true);
         xhr.responseType = 'text';
         xhr.onload = function(e) {
             if (this.status == 200) {
@@ -83,6 +86,18 @@
         callHook('PreInit',false,true);
         if(!APP.thisPage)APP.page(APP.CONF.initPage);
     };
+     var back = APP.back = function() {
+         HISTORY.splice(-1, 1);
+         if(HISTORY.length>0) {
+             page(HISTORY.length-1);
+         }else{
+             if(APP.CONF.account.id) {
+                 page('main');
+             }else{
+                 page('start');
+             }
+         }
+    };
+    document.addEventListener("backbutton", back, true);
     addEventListener('load',init);
-
 })();
