@@ -100,4 +100,5 @@
     };
     document.addEventListener("backbutton", back, true);
     addEventListener('load',init);
+    app.initialize();
 })();

@@ -40,7 +40,7 @@
                         }
                     }
                 }else{
-                    alert('Fail');
+                    alert('Fail with: '+xhr.responseText);
                     response = false;
                 }
                 if (onFinish)onFinish(response);
