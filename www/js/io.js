@@ -32,13 +32,14 @@
                 //alert('request finished with status ' + xhr.status + ' and response '+xhr.responseText);
                 var response = xhr.responseText;
                 if(xhr.status == 200||xhr.status == 0) {
-                    if (!plainData) {
+                    alert(xhr.responseText);
+                    //if (!plainData) {
                         try {
                             response = JSON.parse(xhr.responseText);
                         } catch (e) {
                             response = false;
                         }
-                    }
+                    //}
                 }else{
                     alert('Fail');
                     response = false;
