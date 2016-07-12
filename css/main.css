@@ -1,0 +1,258 @@
+html{
+    user-select: none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+body{
+    background-color: #000;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0px;
+    margin-left: calc(50% - 200px);
+}
+body div{
+    align-content: center;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+#logo{
+    margin-top: 100px;
+    text-align: center;
+    font-size: x-large;
+}
+#logo img{
+    width: 100px;
+}
+.title-colour{
+    color: #54b047;
+}
+.title-colour-second{
+    color: #337f30;
+}
+#preloader{
+    align-content: center;
+    text-align: center;
+    font-size: larger;
+}
+.bottom-edge{
+    position: absolute;
+    width: 400px;
+    top: calc(100% - 100px);
+    left: calc(50% - 200px);
+}
+.bottom-edge-block{
+    position: absolute;
+    width: 400px;
+    min-height: 250px;
+    top: calc(100% - 250px);
+    left: calc(50% - 200px);
+}
+.error{
+    color: #b70404;
+}
+#user{
+    position: absolute;
+    top: 10px;
+    text-align: right;
+    width: calc(100% - 20px);
+}
+#skills{
+    padding-top: 150px;
+    align-content: center;
+    text-align: center;
+    margin: 0px;
+    padding-left: 0px;
+}
+#ask{
+    min-height: 50px;
+    background-color: #337f30;
+    align-content: center;
+    text-align: center;
+    font-size: x-large;
+    padding-top: 5px;
+    top: calc(100% - 50px);
+    left: 0;
+    min-width: 100%;
+    width: 100%;
+}
+.skill{
+    font-size: large ;
+    border-radius: 10px;
+    background-color: #5f5f5f;
+    width: calc(100% - 100px);
+    padding: 10px;
+    min-height: 30px;
+    margin: 10px 50px;
+}
+.buttons-block {
+    align-content: center;
+    text-align: center;
+}
+button{
+    font-size: larger;
+    background: rgba(143, 143, 143, 0.3);
+    color: #fff !important;
+    border-radius: 10px;
+    height: 50px;
+    width: 300px;
+    margin-top: 50px;
+    border: none;
+}
+#backButton{
+    justify-content: center;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: #2b669a;
+    margin: 0;
+}
+.expand .skill-data{
+    display: block;
+}
+.skill-data{
+    display: none;
+    align-content: left;
+    text-align: left;
+}
+.coins{
+    font-size: xx-large;
+    color: yellow;
+}
+.modeChanger{
+    justify-content: center;
+    position: absolute;
+    align-content: center;
+    text-align: right;
+    left: calc(100% - 210px);
+    top: 10px;
+    width: 200px;
+    height: 25px;
+    margin: 0;
+}
+#questionControl{
+    min-height: 50px;
+    background-color: #373737;
+    align-content: center;
+    text-align: center;
+    font-size: large;
+    top: calc(100% - 50px);
+    left: 0;
+    width: 100%;
+    max-width: none;
+}
+#abort{
+    font-size: larger;
+    background: rgba(127, 16, 0, 0.71);
+    color: #fff !important;
+    width: 50%;
+    margin-top: 0;
+    border-radius: 0;
+}
+#accept{
+    font-size: larger;
+    background: #337f30;
+    color: #fff !important;
+    width: 50%;
+    margin-top: 0;
+    border-radius: 0;
+}
+#messages{
+    padding-top: 100px;
+    align-content: center;
+    text-align: center;
+    margin: 0px;
+    padding-left: 0px;
+}
+.message{
+    font-size: small;
+    border-radius: 10px;
+    background-color: #5f5f5f;
+    width: calc(100% - 100px);
+    padding: 10px;
+    min-height: 30px;
+    margin: 10px 50px;
+    align-content: center;
+    text-align: left;
+}
+.question-title{
+    font-size: large;
+}
+.status-message{
+    font-size: smaller;
+    border-radius: 10px;
+    background-color: #343434;
+    width: calc(100% - 100px);
+    padding: 10px;
+    height: auto;
+    margin: 10px 50px;
+    align-content: center;
+    text-align: center;
+}
+.message a{
+    color: #c2c2c2;
+}
+#closeQuestion{
+    justify-content: center;
+    position: absolute;
+    left: calc(100% - 190px);
+    top: 10px;
+    width: 180px;
+    height: 40px;
+    background-color: #9a963b;
+    margin: 0;
+}
+.skills-title{
+    margin-left: 50px;
+    text-align: left;
+}
+#market{
+    min-height: 50px;
+    background-color: #337f30;
+    align-content: center;
+    text-align: center;
+    font-size: x-large;
+    padding-top: 5px;
+    top: calc(100% - 50px);
+    left: 0;
+    width: 100%;
+    max-width: none;
+}
+.dashboard{
+    padding-top: 150px;
+    align-content: center;
+    text-align: center;
+    margin: 0px;
+    padding-left: 0px;
+}
+.block{
+    font-size: large ;
+    border-radius: 10px;
+    background-color: #5f5f5f;
+    width: calc(100% - 100px);
+    padding: 10px;
+    min-height: 30px;
+    margin: 10px 50px;
+}
+.block-layer{
+    padding-top: 150px;
+    align-content: center;
+    text-align: center;
+    margin: 0px;
+    padding-left: 0px;
+}
+.block-title-outside{
+    margin-left: 50px;
+    text-align: left;
+}
+.block input{
+    font-size: larger;
+    color: white;
+    border: 0px;
+    background: rgba(0,0,0,0);
+}

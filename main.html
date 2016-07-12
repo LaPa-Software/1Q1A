@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>1Q1A</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' href='css/mprogress.min.css'/>
+    <script src='js/mprogress.min.js'></script>
+    <link rel="stylesheet" href="css/switchery.css" />
+    <script src="js/switchery.js"></script>
+</head>
+<body>
+<button id="backButton">Назад</button>
+<div class="modeChanger">
+    <label for="answerMode">Режим ответов</label> <input type="checkbox" id="answerMode"/>
+</div>
+<div id="skills">
+    <div class="skills-title">Ваши интересы:</div>
+    <div class="skill"><span class="title">Женская одежда</span></div>
+    <div class="skill"><span class="title">Еда</span></div>
+    <div class="skill expand"><span class="title">Образование</span>
+        <div class="skill-data">
+            <hr>
+            В этом месяце вы накопили:
+            <div class="coins">
+                <img height="25" src="img/coins.svg"/>
+                25 Баллов
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ask" class="bottom-edge">Попросить совет</div>
+<script>
+    modeActivator = new Switchery(document.getElementById('answerMode'),{ size: 'small' });
+</script>
+</body>
+</html>
