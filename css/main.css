@@ -246,13 +246,44 @@ button{
     margin: 0px;
     padding-left: 0px;
 }
+.block-layer button{
+    font-size: larger;
+    background: rgba(143, 143, 143, 0.3);
+    color: #fff !important;
+    border-radius: 10px;
+    height: 50px;
+    width: 300px;
+    margin-top: 50px;
+    border: none;
+    margin-left: 20px;
+}
 .block-title-outside{
     margin-left: 50px;
     text-align: left;
 }
-.block input{
+.block input,textarea,select{
     font-size: larger;
     color: white;
     border: 0px;
-    background: rgba(0,0,0,0);
+    background: rgba(0, 0, 0, 0);
+}
+#message{
+    color: red;
+}
+#account{
+    justify-content: center;
+    position: absolute;
+    left: calc(50% - 50px);
+    top: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: #7f1000;
+    margin: 0;
+}
+#release{
+    color: rgba(255, 255, 255, 0.4);
+}
+.indicator img{
+    height: 22px;
+    margin-bottom: -5px;
 }

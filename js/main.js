@@ -45,6 +45,8 @@
 
     }
     function renderPage(id) {
+        if(APP.thisPage&&APP.PAGE[APP.thisPage].unload)try{APP.PAGE[APP.thisPage].unload();}catch(e){console.log('Error while unload page: '+APP.thisPage);throw e}
+
         document.body.innerHTML='<div>'+APP.PAGE[id].body+'</div>';
         if(APP.CONF.backButton&&!APP.PAGE[id].hideHistory)document.body.innerHTML+='<button id="backButton" onclick="APP.back()">Назад</button>';
         window.title=APP.PAGE[id].title||CONF.title;
@@ -54,13 +56,14 @@
         APP.thisPage=id;
         APP.targetPage=false;
     }
-    var page = APP.page = function (id) {
+    var page = APP.page = function (id,resetHistory) {
         if(APP.targetPage)return;
         APP.targetPage=id;
         if(!APP.PAGE[id]) {
             getPage(id);
             return;
         }
+        if(resetHistory)HISTORY=[];
         renderPage(id);
     };
     var execLib = APP.execLib = function (id) {
@@ -80,16 +83,34 @@
         };
         xhr.send();
     };
+    var message = APP.message = function (text,popup) {
+        if(!document.getElementById('message'))popup=true;
+        if(popup){alert(text)}else{document.getElementById('message').innerHTML=text;}
+    };
+    var getLocation = APP.getLocation = function (forceLoad) {
+        if(!navigator.geolocation)return false;
+        if (!forceLoad&&CONF.location) {
+            return CONF.location;
+        } else {
+            document.getElementById('local_indicator').innerHTML='<img src="img/loader.svg"/>';
+            navigator.geolocation.getCurrentPosition(function (position) {
+                CONF.location={'lat': position.coords.latitude, 'long': position.coords.longitude}
+                document.getElementById('local_indicator').innerHTML='';
+            });
+            return false;
+        }
+    };
     var init = function () {
-        APP.CONF=window.APPCONF||(localStorage.getItem('CONF')?JSON.parse(localStorage.getItem('CONF')):{});
-        APP.PAGE=window.APPPAGE||{};
+        APP.CONF=CONF=window.APPCONF||(localStorage.getItem('CONF')?JSON.parse(localStorage.getItem('CONF')):{});
+        APP.PAGE=PAGE=window.APPPAGE||{};
+        APP.HISTORY=HISTORY;
         callHook('PreInit',false,true);
         if(!APP.thisPage)APP.page(APP.CONF.initPage);
     };
      var back = APP.back = function() {
          HISTORY.splice(-1, 1);
          if(HISTORY.length>0) {
-             page(HISTORY.length-1);
+             page(HISTORY[HISTORY.length-1]);
          }else{
              if(APP.CONF.account.id) {
                  page('main');
