@@ -44,6 +44,9 @@ body div{
     top: calc(100% - 100px);
     left: calc(50% - 200px);
 }
+.second{
+    top: calc(100% - 200px);
+}
 .bottom-edge-block{
     position: absolute;
     width: 400px;
@@ -75,6 +78,18 @@ body div{
     font-size: x-large;
     padding-top: 5px;
     top: calc(100% - 50px);
+    left: 0;
+    min-width: 100%;
+    width: 100%;
+}
+#questions_btn{
+    min-height: 50px;
+    background-color: #40657f;
+    align-content: center;
+    text-align: center;
+    font-size: x-large;
+    padding-top: 5px;
+    top: calc(100% - 105px);
     left: 0;
     min-width: 100%;
     width: 100%;
@@ -286,4 +301,7 @@ button{
 .indicator img{
     height: 22px;
     margin-bottom: -5px;
+}
+.left{
+    text-align: left
 }

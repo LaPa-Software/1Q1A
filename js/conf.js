@@ -5,6 +5,7 @@ var APPCONF = {
     'account':{
 
     },
+    'loader':'<img src="img/loader.svg"/>',
     'initPage': 'init',
     'backButton': true
 };

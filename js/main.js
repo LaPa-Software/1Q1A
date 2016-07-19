@@ -44,11 +44,11 @@
     function getPage(id) {
 
     }
-    function renderPage(id) {
+    function renderPage(id,hideBackButton) {
         if(APP.thisPage&&APP.PAGE[APP.thisPage].unload)try{APP.PAGE[APP.thisPage].unload();}catch(e){console.log('Error while unload page: '+APP.thisPage);throw e}
 
         document.body.innerHTML='<div>'+APP.PAGE[id].body+'</div>';
-        if(APP.CONF.backButton&&!APP.PAGE[id].hideHistory)document.body.innerHTML+='<button id="backButton" onclick="APP.back()">Назад</button>';
+        if(APP.CONF.backButton&&!hideBackButton&&!APP.PAGE[id].hideHistory)document.body.innerHTML+='<button id="backButton" onclick="APP.back()">Назад</button>';
         window.title=APP.PAGE[id].title||CONF.title;
         if(APP.PAGE[id].init)try{APP.PAGE[id].init();}catch(e){console.log('Error while initialising page: '+id);throw e}
         APP.pageState='ready';
@@ -64,7 +64,7 @@
             return;
         }
         if(resetHistory)HISTORY=[];
-        renderPage(id);
+        renderPage(id,resetHistory?true:null);
     };
     var execLib = APP.execLib = function (id) {
         eval(APP.LIB[id]);
@@ -87,15 +87,22 @@
         if(!document.getElementById('message'))popup=true;
         if(popup){alert(text)}else{document.getElementById('message').innerHTML=text;}
     };
-    var getLocation = APP.getLocation = function (forceLoad) {
+    var getLocation = APP.getLocation = function (forceLoad,func) {
         if(!navigator.geolocation)return false;
         if (!forceLoad&&CONF.location) {
+            if(func)func(CONF.location);
             return CONF.location;
         } else {
-            document.getElementById('local_indicator').innerHTML='<img src="img/loader.svg"/>';
+            CONF.waitLoc=setTimeout(function () {
+                if(CONF.location)return true;
+                delete CONF.waitLoc;
+                if(func)func(false);
+            },5000);
             navigator.geolocation.getCurrentPosition(function (position) {
-                CONF.location={'lat': position.coords.latitude, 'long': position.coords.longitude}
-                document.getElementById('local_indicator').innerHTML='';
+                CONF.location={'lat': position.coords.latitude, 'long': position.coords.longitude};
+                if(func&&CONF.waitLoc)func(CONF.location);
+            },function () {
+                if(func&&CONF.waitLoc)func(false);
             });
             return false;
         }
