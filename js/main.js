@@ -48,7 +48,7 @@
         if(APP.thisPage&&APP.PAGE[APP.thisPage].unload)try{APP.PAGE[APP.thisPage].unload();}catch(e){console.log('Error while unload page: '+APP.thisPage);throw e}
 
         document.body.innerHTML='<div>'+APP.PAGE[id].body+'</div>';
-        if(APP.CONF.backButton&&!hideBackButton&&!APP.PAGE[id].hideHistory)document.body.innerHTML+='<button id="backButton" onclick="APP.back()">Назад</button>';
+        if(APP.CONF.backButton&&!hideBackButton&&!APP.PAGE[id].hideHistory)document.body.innerHTML+='<button id="backButton" onclick="APP.back()"><img src="img/left-arrow.svg" height="40"></button>';
         window.title=APP.PAGE[id].title||CONF.title;
         if(APP.PAGE[id].init)try{APP.PAGE[id].init();}catch(e){console.log('Error while initialising page: '+id);throw e}
         APP.pageState='ready';

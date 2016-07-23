@@ -2,7 +2,7 @@ var APPPAGE={
     'init':{
         'title':'Loading...',
         'hideHistory':true,
-        'body':'<div id="logo"><img src="img/logo.png"/><br>1 Вопрос <span class="title-colour-second">-</span><span class="title-colour"> 1 Ответ</span><br><span id="release">beta</span></div><div class="bottom-edge" id="preloader">Подключение...</div>',
+        'body':'<div id="logo"><img src="img/logo.png"/></div><div class="bottom-edge" id="preloader">Подключение...</div>',
         'init':function () {
             var loader = new Mprogress({
                 template: 1
@@ -61,7 +61,7 @@ var APPPAGE={
             for(i in Object.keys(APP.CONF.account.skills)){
                 listSkills+='<div class="skill" onclick="this.className=\'skill expand\';"><span class="title">'+APP.CONF.account.skills[Object.keys(APP.CONF.account.skills)[i]]['title']+'</span><div class="skill-data"><hr>В этом месяце вы накопили:<div class="coins"><img height="25" src="img/coins.svg"/> '+APP.CONF.account.skills[Object.keys(APP.CONF.account.skills)[i]]['coins']+' Баллов</div></div></div>';
             }
-            //listSkills=listSkills==''?listSkills=
+            listSkills=listSkills!=''?listSkills:'<button onclick="APP.page(\'setup\');">Указать интересы</button>';
             document.getElementById('skills').innerHTML=listSkills;
             if(APP.CONF.account.invites.length!=0){
                 document.getElementById('questions_btn').style.display='block';
@@ -72,7 +72,7 @@ var APPPAGE={
     'start':{
         'hideHistory':true,
         'title':'Добро пожаловать!',
-        'body':'<div id="logo"><img src="img/logo.png"/><br>1 Вопрос <span class="title-colour-second">-</span><span class="title-colour"> 1 Ответ</span><br><span id="release">beta</span></div><div class="buttons-block bottom-edge-block"><button id="auth" onclick="APP.page(\'auth\');">Авторизация</button><br><button id="reg" onclick="APP.page(\'reg\');">Регистрация</button></div>'
+        'body':'<div id="logo"><img src="img/logo.png"/></div><div class="buttons-block bottom-edge-block"><button id="auth" onclick="APP.page(\'auth\');">Авторизация</button><br><button id="reg" onclick="APP.page(\'reg\');">Регистрация</button></div>'
     },
     'auth':{
         'title':'Авторизация',
@@ -90,7 +90,7 @@ var APPPAGE={
     },
     'ask':{
         'title':'Задать вопрос',
-        'body':'<div class="block-layer">О чем вы хотите спросить?<div class="block" style="text-align: left"><textarea id="question" placeholder="Введите вопрос" maxlength="1000" rows="5" cols="25"></textarea><br><label for="category">Категория:</label> <select id="category"></select><br><br><label for="local">Поблизости</label> <input type="checkbox" id="local" onchange="if(this.checked){document.getElementById(\'local_indicator\').innerHTML=APP.CONF.loader;APP.getLocation(true,function(){document.getElementById(\'local_indicator\').innerHTML=\'\';});}"/><span id="local_indicator" class="indicator"></span></div><div id="message"></div><button id="send" onclick="APP.sendQuestion(document.getElementById(\'question\').value,document.getElementById(\'category\').value,document.getElementById(\'local\').checked);">Отправить</button></div>',
+        'body':'<div class="block-layer">О чем вы хотите спросить?<div class="block" style="text-align: left"><textarea id="question" placeholder="Введите вопрос" maxlength="1000" rows="5" cols="25"></textarea><br><label for="category">Категория:</label> <select id="category"></select><br><br><label for="local">Поблизости</label> <input type="checkbox" id="local" onchange="if(this.checked){document.getElementById(\'local_indicator\').innerHTML=APP.CONF.loader;APP.getLocation(true,function(result){if(document.getElementById(\'local_indicator\'))document.getElementById(\'local_indicator\').innerHTML=\'\';if(result==false){localActivator.bindClick();this.checked=false;APP.message(\'Необходимо разрешение для доступа к Гео-позиции\');}});}"/><span id="local_indicator" class="indicator"></span></div><div id="message"></div><button id="send" onclick="APP.sendQuestion(document.getElementById(\'question\').value,document.getElementById(\'category\').value,document.getElementById(\'local\').checked);">Отправить</button></div>',
         'init':function () {
             localActivator = new Switchery(document.getElementById('local'),{ size: 'small' });
             APP.require('js/question.js',function () {
@@ -120,15 +120,16 @@ var APPPAGE={
     },
     'setup':{
         'title':'Выбор категорий',
-        'body':'<div class="block-layer">Укажите категории, которые вам интересны:<div class="block" id="listSkills"><img src="img/loader.svg"/></div><button id="send" onclick="APP.saveSkills();">Продолжить</button></div>',
+        'body':'<div class="block-layer">Укажите 3 категории, которые вам интересны:<div class="block" id="listSkills"><img src="img/loader.svg"/></div><button id="send" onclick="APP.saveSkills();">Продолжить</button></div>',
         'init':function () {
             APP.CONF.account.mySkills={};
+            APP.CONF.account.mySkillsCount=0;
             APP.require('js/question.js',function () {
                 APP.listSkills(function () {
                     document.getElementById('listSkills').innerHTML='';
                     document.getElementById('listSkills').className='block left';
                     for(i in APP.CONF.listCategory) {
-                        document.getElementById('listSkills').innerHTML += '<input type="checkbox" id="'+i+'" class="js-switch" onchange="if(this.checked){APP.CONF.account.mySkills[\''+i+'\']=true;}else{delete APP.CONF.account.mySkills[\''+i+'\'];}"/> <label for="'+i+'">'+APP.CONF.listCategory[i]+'</label><br>';
+                        document.getElementById('listSkills').innerHTML += '<input type="checkbox" id="'+i+'" class="js-switch" onchange="if(this.checked){if(APP.CONF.account.mySkillsCount>2){this.checked=false;return false;};APP.CONF.account.mySkills[\''+i+'\']=true;APP.CONF.account.mySkillsCount++;}else{delete APP.CONF.account.mySkills[\''+i+'\'];APP.CONF.account.mySkillsCount--;}"/> <label for="'+i+'">'+APP.CONF.listCategory[i]+'</label><br>';
                     }
                     var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
                     elems.forEach(function(html) {
@@ -154,7 +155,7 @@ var APPPAGE={
         'title':'Ответ на вопрос',
         'body':'<button id="closeQuestion" onclick="APP.cancelAnswer();">Отказаться</button><div id="messages"></div>',
         'init':function () {
-            document.getElementById('messages').innerHTML = '<div class="message">Вопрос:<br><span class="question-title">' + APP.CONF.account.invites[APP.CONF.openQuestion].text + '</span></div><div class="status-message">Ваш присоединились к диалогу</div><div class="message" id="answer_block">Введите ваш ответ:<br><span class="question-title"><textarea id="answer" maxlength="1000" rows="5" cols="25"></textarea></span></div><button id="send" onclick="APP.sendAnswer();">Отправить</button>';
+            document.getElementById('messages').innerHTML = '<div class="message">Вопрос:<br><span class="question-title">' + APP.CONF.account.invites[APP.CONF.openQuestion].text + '</span></div><div class="status-message">Вы присоединились к диалогу</div><div class="message" id="answer_block">Введите ваш ответ:<br><span class="question-title"><textarea id="answer" maxlength="1000" rows="5" cols="25"></textarea></span></div><button id="send" onclick="APP.sendAnswer();">Отправить</button>';
         }
     }
 };
